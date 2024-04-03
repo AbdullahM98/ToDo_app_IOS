@@ -10,7 +10,7 @@
 #import "TaskDetailsViewController.h"
 @interface InProgressViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *inProgressTableView;
-@property NSMutableArray<Task*>* tasksList;
+@property NSArray<Task*>* tasksList;
 @end
 
 @implementation InProgressViewController
@@ -19,26 +19,29 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   // _inProgressList = [NSMutableArray new];
-    _tasksList = [UserDefaultUtils retrieveTasksFromUserDefaultsWithKey:@"tasks"];
-    _inProgressList = [NSMutableArray new];
-    if(_tasksList == nil){
-        NSLog(@"here");
-        _tasksList = [NSMutableArray new];
-    }
+    NSLog(@"IN did load ");
+
    
 }
 
 -(void) viewWillAppear:(BOOL)animated{
+    _tasksList = [UserDefaultUtils retrieveTasksFromUserDefaultsWithKey:@"tasks"];
+    _inProgressList = [NSMutableArray new];
+    NSLog(@"%d",_tasksList.count);
+
+    if(_tasksList == nil){
+        NSLog(@"IN user default list is null ");
+        _tasksList = [NSArray new];
+    }
     for(int i=0; i< _tasksList.count;i++){
         if([_tasksList objectAtIndex:i].status == 1){
-            NSLog(@"status is %d",[_tasksList objectAtIndex:i].status);
+            NSLog(@"IN status is so will be added to view list %d",[_tasksList objectAtIndex:i].status);
 
             [_inProgressList addObject:[_tasksList objectAtIndex:i]];
-            [_inProgressTableView reloadData];
+           // [_inProgressTableView reloadData];
         }
     }
-    NSLog(@"array size is %d",_inProgressList.count);
+    NSLog(@"IN displayed array size is %d",_inProgressList.count);
     [_inProgressTableView reloadData];
     
 }
@@ -54,8 +57,8 @@
 //}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    TaskDetailsViewController * TDVC = [self.storyboard instantiateViewControllerWithIdentifier:@"taskDetailsViewController"];
-    printf("%ld",indexPath.row);
+    TaskDetailsViewController * TDVC = [self.storyboard instantiateViewControllerWithIdentifier:@"taskDetailViewController"];
+    printf("status %ld",[_tasksList objectAtIndex:indexPath.row].status) ;
     TDVC.task = [_inProgressList objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:TDVC animated:YES];
 }

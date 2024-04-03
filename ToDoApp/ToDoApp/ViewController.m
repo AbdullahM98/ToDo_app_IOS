@@ -37,12 +37,12 @@
     }
     
     for(_task in _AllList){
-        NSLog(@"status for task is %d",_task.status);
+        NSLog(@"status for task  in UserDefList is %d",_task.status);
     }
     
     for(_task in _AllList){
         if(_task.status == 0){
-            NSLog(@"status is %d",_task.status);
+            NSLog(@"status is so it will be added to todoList %d",_task.status);
 
             [_TaskList addObject:_task];
         }
@@ -59,17 +59,18 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     _AllList = [UserDefaultUtils retrieveTasksFromUserDefaultsWithKey:@"tasks"];
+    NSLog(@"restored array size is %d", _AllList.count);
     _TaskList = [NSMutableArray new];
-    for(int i=0; i< _AllList.count;i++){
-        if([_AllList objectAtIndex:i].status == 0){
-            NSLog(@"status is %d",[_AllList objectAtIndex:i].status);
+    for(_task in _AllList){
+        if(_task.status == 0){
+            NSLog(@"status is %d",_task.status);
 
-            [_TaskList addObject:[_AllList objectAtIndex:i]];
+            [_TaskList addObject:_task];
         }
     }
     NSLog(@"array size is ON WILL APPEAR %lu",(unsigned long)_TaskList.count);
     for(_task in _TaskList){
-        NSLog(@"status for task is %d",_task.status);
+        NSLog(@"status for task in todo %d",_task.status);
     }
     [_tableView reloadData];
 }
@@ -115,14 +116,14 @@
             cell.imageView.image=[UIImage imageNamed:@"important"];
             break;
     }
-    NSLog(@"hereeeee %d",[_TaskList objectAtIndex:indexPath.row].status);
+    NSLog(@"hereeeee status within cell creation %d",[_TaskList objectAtIndex:indexPath.row].status);
     
     
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     TaskDetailsViewController *viewC = [self.storyboard
-                                        instantiateViewControllerWithIdentifier:@"taskDetailsViewController"];
+                                        instantiateViewControllerWithIdentifier:@"taskDetailViewController"];
     viewC.sender = self;
     viewC.status = 0;
     viewC.indexAtArray = indexPath.row ;
@@ -131,15 +132,29 @@
 }
 
 -(void) addTasks :(NSMutableArray<Task*>*)tasks {
-    _TaskList = tasks;
+    _AllList = [NSArray arrayWithArray:tasks];
+    NSLog(@"restored array size is %d", _AllList.count);
+    _TaskList = [NSMutableArray new];
+    for(_task in _AllList){
+        if(_task.status == 0){
+            NSLog(@"status is %d",_task.status);
+
+            [_TaskList addObject:_task];
+        }
+    }
     NSLog(@"array size in ON Add Task %d",_TaskList.count);
     
     [_tableView reloadData];
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSMutableArray* tempArr = [NSMutableArray arrayWithArray:_AllList];
+    int index = [tempArr indexOfObject:[_TaskList objectAtIndex:indexPath.row] ];
     [_TaskList removeObjectAtIndex:indexPath.row];
-    [UserDefaultUtils storeTasksInUserDefaults:_TaskList withKey:@"tasks"];
+    [tempArr removeObjectAtIndex:index];
+    NSLog(@"array size in ON Add Task %d",_TaskList.count);
+
+    [UserDefaultUtils storeTasksInUserDefaults:tempArr withKey:@"tasks"];
     [_tableView reloadData];
 }
 

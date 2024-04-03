@@ -24,6 +24,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+}
+- (void)viewWillAppear:(BOOL)animated{
     _tasksList = [UserDefaultUtils retrieveTasksFromUserDefaultsWithKey:@"tasks"];
 
     if(_tasksList == nil){
@@ -34,7 +37,6 @@
     [_statusSegment removeSegmentAtIndex:2 animated:YES];
     [_statusSegment removeSegmentAtIndex:1 animated:YES];
 }
-
 
 - (IBAction)SaveBtn:(id)sender {
     NSDate *currentDate = [NSDate date];
