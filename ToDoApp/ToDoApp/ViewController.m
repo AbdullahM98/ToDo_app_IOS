@@ -15,7 +15,8 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *prioritySegment;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property NSMutableArray<Task*>* AllList;
+@property NSArray<Task*>* AllList;
+@property Task* task;
 
 
 @end
@@ -35,15 +36,18 @@
         _AllList = [NSMutableArray new];
     }
     
+    for(_task in _AllList){
+        NSLog(@"status for task is %d",_task.status);
+    }
     
-    for(int i=0; i< _AllList.count;i++){
-        if([_AllList objectAtIndex:i].status == 0){
-            NSLog(@"status is %d",[_AllList objectAtIndex:i].status);
+    for(_task in _AllList){
+        if(_task.status == 0){
+            NSLog(@"status is %d",_task.status);
 
-            [_TaskList addObject:[_AllList objectAtIndex:i]];
+            [_TaskList addObject:_task];
         }
     }
-    NSLog(@"array size is %d",_TaskList.count);
+    NSLog(@"array size is %lu",(unsigned long)_TaskList.count);
     [_tableView reloadData];
     _searchBar.delegate = self;
     _searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
@@ -63,8 +67,10 @@
             [_TaskList addObject:[_AllList objectAtIndex:i]];
         }
     }
-    NSLog(@"array size is ON WILL APPEAR %d",_TaskList.count);
-    
+    NSLog(@"array size is ON WILL APPEAR %lu",(unsigned long)_TaskList.count);
+    for(_task in _TaskList){
+        NSLog(@"status for task is %d",_task.status);
+    }
     [_tableView reloadData];
 }
 

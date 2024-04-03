@@ -21,7 +21,6 @@
 		76027ADB2BBC079A00F6C867 /* DoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76027ADA2BBC079A00F6C867 /* DoneViewController.m */; };
 		76027ADE2BBC0CD200F6C867 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 76027ADD2BBC0CD200F6C867 /* Task.m */; };
 		76027AE12BBC12B600F6C867 /* addViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76027AE02BBC12B600F6C867 /* addViewController.m */; };
-		76027AE82BBC2D0600F6C867 /* TaskRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 76027AE72BBC2D0600F6C867 /* TaskRepository.m */; };
 		76D680432BBCE5B900B651AE /* UserDefaultUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D680422BBCE5B900B651AE /* UserDefaultUtils.m */; };
 		76D6804D2BBCF76000B651AE /* TaskDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D6804C2BBCF76000B651AE /* TaskDetailsViewController.m */; };
 /* End PBXBuildFile section */
@@ -70,8 +69,6 @@
 		76027ADF2BBC12B600F6C867 /* addViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = addViewController.h; sourceTree = "<group>"; };
 		76027AE02BBC12B600F6C867 /* addViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = addViewController.m; sourceTree = "<group>"; };
 		76027AE22BBC23CC00F6C867 /* addDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = addDelegate.h; sourceTree = "<group>"; };
-		76027AE62BBC2D0600F6C867 /* TaskRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskRepository.h; sourceTree = "<group>"; };
-		76027AE72BBC2D0600F6C867 /* TaskRepository.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskRepository.m; sourceTree = "<group>"; };
 		76D680412BBCE5B900B651AE /* UserDefaultUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserDefaultUtils.h; sourceTree = "<group>"; };
 		76D680422BBCE5B900B651AE /* UserDefaultUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserDefaultUtils.m; sourceTree = "<group>"; };
 		76D6804A2BBCF21000B651AE /* DetailsDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsDelegate.h; sourceTree = "<group>"; };
@@ -148,8 +145,6 @@
 				76027ADF2BBC12B600F6C867 /* addViewController.h */,
 				76027AE02BBC12B600F6C867 /* addViewController.m */,
 				76027AE22BBC23CC00F6C867 /* addDelegate.h */,
-				76027AE62BBC2D0600F6C867 /* TaskRepository.h */,
-				76027AE72BBC2D0600F6C867 /* TaskRepository.m */,
 				76D680412BBCE5B900B651AE /* UserDefaultUtils.h */,
 				76D680422BBCE5B900B651AE /* UserDefaultUtils.m */,
 				76D6804A2BBCF21000B651AE /* DetailsDelegate.h */,
@@ -308,7 +303,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				76027ADE2BBC0CD200F6C867 /* Task.m in Sources */,
-				76027AE82BBC2D0600F6C867 /* TaskRepository.m in Sources */,
 				76D680432BBCE5B900B651AE /* UserDefaultUtils.m in Sources */,
 				76027ADB2BBC079A00F6C867 /* DoneViewController.m in Sources */,
 				76027AA92BBBFE8300F6C867 /* ViewController.m in Sources */,
