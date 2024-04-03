@@ -123,7 +123,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     TaskDetailsViewController *viewC = [self.storyboard
-                                        instantiateViewControllerWithIdentifier:@"taskDetailViewController"];
+                                        instantiateViewControllerWithIdentifier:@"taskDetailsViewController"];
     viewC.sender = self;
     viewC.status = 0;
     viewC.indexAtArray = indexPath.row ;

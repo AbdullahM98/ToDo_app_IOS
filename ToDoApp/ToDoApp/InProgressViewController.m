@@ -57,9 +57,11 @@
 //}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    TaskDetailsViewController * TDVC = [self.storyboard instantiateViewControllerWithIdentifier:@"taskDetailViewController"];
+    TaskDetailsViewController * TDVC = [self.storyboard instantiateViewControllerWithIdentifier:@"taskDetailsViewController"];
     printf("status %ld",[_tasksList objectAtIndex:indexPath.row].status) ;
     TDVC.task = [_inProgressList objectAtIndex:indexPath.row];
+    NSLog(@"%@",self.navigationController);
+
     [self.navigationController pushViewController:TDVC animated:YES];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
