@@ -16,7 +16,10 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property NSArray<Task*>* AllList;
+@property NSMutableArray<Task*>* tempTodo;
 @property Task* task;
+@property bool isSearching;
+@property NSMutableArray<Task*>* searchList;
 
 
 @end
@@ -35,10 +38,7 @@
     if(_AllList == nil){
         _AllList = [NSMutableArray new];
     }
-    
-    for(_task in _AllList){
-        NSLog(@"status for task  in UserDefList is %d",_task.status);
-    }
+   
     
     for(_task in _AllList){
         if(_task.status == 0){
@@ -49,8 +49,13 @@
     }
     NSLog(@"array size is %lu",(unsigned long)_TaskList.count);
     [_tableView reloadData];
+    
     _searchBar.delegate = self;
     _searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    _searchBar.delegate = self;
+    _searchList = [NSMutableArray new];
+
+        _isSearching = NO;
     //[self retrieveTasksFromUserDefaultsWithKey:@"tasks"];
     // Do any additional setup after loading the view.
 }
@@ -93,7 +98,13 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_TaskList count];
+      NSInteger count =0;
+    if(_isSearching && ![_searchBar.text isEqual:@""]){
+        count = _searchList.count;
+    }else{
+        count = _TaskList.count;
+    }
+    return count;;
 }
 
 
@@ -158,9 +169,7 @@
     [_tableView reloadData];
 }
 
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
-    
-}
+
 
 -(void) filterByPriority{
     int selectedIndex = _prioritySegment.selectedSegmentIndex;
@@ -198,6 +207,16 @@
      }
 }
 
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    _isSearching = YES;
+        [_searchList removeAllObjects];
+        for(Task * task in _TaskList){
+            if([task.name containsString:[searchText lowercaseString]]){
+                [_searchList addObject:task];
+            }
+            [_tableView reloadData];
+        }
+}
 
 
 @end
